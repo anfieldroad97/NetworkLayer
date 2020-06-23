@@ -14,6 +14,7 @@
 		11A3209D24A1CF9A00D82D14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11A3209C24A1CF9A00D82D14 /* Assets.xcassets */; };
 		11A320A024A1CF9A00D82D14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11A3209E24A1CF9A00D82D14 /* LaunchScreen.storyboard */; };
 		11A320A824A2192B00D82D14 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A320A724A2192B00D82D14 /* HTTPMethod.swift */; };
+		11A320AA24A219EC00D82D14 /* HTTPHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A320A924A219EC00D82D14 /* HTTPHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		11A3209F24A1CF9A00D82D14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11A320A124A1CF9A00D82D14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11A320A724A2192B00D82D14 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		11A320A924A219EC00D82D14 /* HTTPHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				11A3209E24A1CF9A00D82D14 /* LaunchScreen.storyboard */,
 				11A320A124A1CF9A00D82D14 /* Info.plist */,
 				11A320A724A2192B00D82D14 /* HTTPMethod.swift */,
+				11A320A924A219EC00D82D14 /* HTTPHeader.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			files = (
 				11A320A824A2192B00D82D14 /* HTTPMethod.swift in Sources */,
 				11A3209824A1CF9700D82D14 /* ViewController.swift in Sources */,
+				11A320AA24A219EC00D82D14 /* HTTPHeader.swift in Sources */,
 				11A3209424A1CF9700D82D14 /* AppDelegate.swift in Sources */,
 				11A3209624A1CF9700D82D14 /* SceneDelegate.swift in Sources */,
 			);

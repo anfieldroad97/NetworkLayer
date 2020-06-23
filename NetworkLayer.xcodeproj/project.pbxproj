@@ -19,6 +19,7 @@
 		11A320AE24A21AED00D82D14 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A320AD24A21AED00D82D14 /* APIError.swift */; };
 		11A320B024A21EE600D82D14 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A320AF24A21EE600D82D14 /* APIResponse.swift */; };
 		11A320B224A2200900D82D14 /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A320B124A2200900D82D14 /* APIResult.swift */; };
+		11A320B424A2209800D82D14 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A320B324A2209800D82D14 /* APIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		11A320AD24A21AED00D82D14 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		11A320AF24A21EE600D82D14 /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		11A320B124A2200900D82D14 /* APIResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResult.swift; sourceTree = "<group>"; };
+		11A320B324A2209800D82D14 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				11A320AD24A21AED00D82D14 /* APIError.swift */,
 				11A320AF24A21EE600D82D14 /* APIResponse.swift */,
 				11A320B124A2200900D82D14 /* APIResult.swift */,
+				11A320B324A2209800D82D14 /* APIClient.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				11A320B224A2200900D82D14 /* APIResult.swift in Sources */,
 				11A320A824A2192B00D82D14 /* HTTPMethod.swift in Sources */,
 				11A3209824A1CF9700D82D14 /* ViewController.swift in Sources */,
+				11A320B424A2209800D82D14 /* APIClient.swift in Sources */,
 				11A320AA24A219EC00D82D14 /* HTTPHeader.swift in Sources */,
 				11A3209424A1CF9700D82D14 /* AppDelegate.swift in Sources */,
 				11A320AC24A21AB600D82D14 /* APIRequest.swift in Sources */,

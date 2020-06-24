@@ -8,21 +8,22 @@
 
 import Foundation
 
-class APIClient {
-    typealias Handler = (APIResult<Data?>) -> Void
-    
-    private let session = URLSession.shared
+final class APIClient {
+    private let session: URLSession
     private let requestBuilder: RequestBuilder
+    private let parser: APIParser
     
-    init(requestBuilder: RequestBuilder) {
+    init(session: URLSession, requestBuilder: RequestBuilder, parser: APIParser) {
+        self.session = session
         self.requestBuilder = requestBuilder
+        self.parser = parser
     }
     
-    func perform(_ request: APIRequest, _ completion: @escaping Handler) {
+    func perform<T: Decodable>(_ request: APIRequest, _ completion: @escaping (APIResult<T>) -> Void) {
         let urlRequest = requestBuilder.buildRequest(from: request)
         
-        let task = session.dataTask(with: urlRequest) { (data, response, error) in
-            guard let httpResponse = response as? HTTPURLResponse else {
+        let task = session.dataTask(with: urlRequest) { [weak self] (data, response, error) in
+            guard let _ = response as? HTTPURLResponse else {
                 DispatchQueue.main.async {
                     completion(.failure(.requestFailed));
                 }
@@ -31,7 +32,17 @@ class APIClient {
             }
             
             DispatchQueue.main.async {
-                completion(.success(APIResponse<Data?>(statusCode: httpResponse.statusCode, body: data)))
+                if let unwrappedData = data, let parser = self?.parser {
+                    do {
+                        let decodedResponse = try parser.decode(data: unwrappedData, to: T.self)
+                        completion(.success(decodedResponse))
+                    } catch {
+                        completion(.failure(APIError.decodingFailure))
+                    }
+                    
+                } else {
+                    completion(.failure(APIError.emptyResponse))
+                }
             }
         }
         

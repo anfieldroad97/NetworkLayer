@@ -26,7 +26,13 @@ final class ViewController: UIViewController {
             fatalError("Failed to create URL")
         }
         
-        return APIClient(requestBuilder: RequestBuilder(baseURL: url))
+        let requestBuilder = RequestBuilder(baseURL: url)
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let parser = APIParser(decoder: decoder)
+        
+        return APIClient(session: .shared, requestBuilder: requestBuilder, parser: parser)
     }()
     
     private var countries: [Country] = []
@@ -64,17 +70,10 @@ final class ViewController: UIViewController {
     private func loadCountries() {
         let request = APIRequest(method: .get, path: "countries")
         request.queryItems = [URLQueryItem(name: "api_key", value: Credentials.apiKey)]
-        apiClient.perform(request) { [weak self] (result) in
+        apiClient.perform(request) { [weak self] (result: APIResult<CountryResponse>) in
             switch result {
             case .success(let response):
-                do {
-                    let decodedResponse = try response.decode(to: CountryResponse.self)
-                    self?.setCountries(decodedResponse.body.countries)
-                } catch let error as APIError {
-                    self?.showAlert(withMessage: error.localizedDescription)
-                } catch {
-                    self?.showAlert(withMessage: error.localizedDescription)
-                }
+                self?.setCountries(response.countries)
             case .failure(let error):
                 self?.showAlert(withMessage: error.localizedDescription)
             }

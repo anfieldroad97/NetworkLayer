@@ -21,13 +21,13 @@ final class ViewController: UIViewController {
         return tableView
     }()
     
-    private var baseURL: URL {
+    private let apiClient: APIClient = {
         guard let url = URL(string: "https://calendarific.com/api/v2/") else {
             fatalError("Failed to create URL")
         }
         
-        return url
-    }
+        return APIClient(requestBuilder: RequestBuilder(baseURL: url))
+    }()
     
     private var countries: [Country] = []
     
@@ -64,7 +64,7 @@ final class ViewController: UIViewController {
     private func loadCountries() {
         let request = APIRequest(method: .get, path: "countries")
         request.queryItems = [URLQueryItem(name: "api_key", value: Credentials.apiKey)]
-        APIClient(baseURL: baseURL).perform(request) { [weak self] (result) in
+        apiClient.perform(request) { [weak self] (result) in
             switch result {
             case .success(let response):
                 do {

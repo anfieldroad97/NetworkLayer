@@ -12,28 +12,14 @@ class APIClient {
     typealias Handler = (APIResult<Data?>) -> Void
     
     private let session = URLSession.shared
-    private let baseURL: URL
+    private let requestBuilder: RequestBuilder
     
-    init(baseURL: URL) {
-        self.baseURL = baseURL
+    init(requestBuilder: RequestBuilder) {
+        self.requestBuilder = requestBuilder
     }
     
     func perform(_ request: APIRequest, _ completion: @escaping Handler) {
-        var urlComponents = URLComponents()
-        urlComponents.scheme = baseURL.scheme
-        urlComponents.host = baseURL.host
-        urlComponents.path = baseURL.path
-        urlComponents.queryItems = request.queryItems
-        
-        guard let url = urlComponents.url?.appendingPathComponent(request.path) else {
-            completion(.failure(.invalidURL)); return
-        }
-        
-        var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = request.method.rawValue
-        urlRequest.httpBody = request.body
-        
-        request.headers?.forEach { urlRequest.addValue($0.value, forHTTPHeaderField: $0.field) }
+        let urlRequest = requestBuilder.buildRequest(from: request)
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse else {

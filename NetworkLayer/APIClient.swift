@@ -37,10 +37,16 @@ class APIClient {
         
         let task = session.dataTask(with: urlRequest) { (data, response, error) in
             guard let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(.requestFailed)); return
+                DispatchQueue.main.async {
+                    completion(.failure(.requestFailed));
+                }
+                
+                return
             }
             
-            completion(.success(APIResponse<Data?>(statusCode: httpResponse.statusCode, body: data)))
+            DispatchQueue.main.async {
+                completion(.success(APIResponse<Data?>(statusCode: httpResponse.statusCode, body: data)))
+            }
         }
         
         task.resume()
